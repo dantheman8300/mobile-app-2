@@ -1,12 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { ClerkProvider, SignedOut, SignedIn } from "@clerk/clerk-expo";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ClerkProvider publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}>
+      <View style={styles.container}>
+        <SignedIn>
+          <Text>You are Signed in</Text>
+        </SignedIn>
+        <SignedOut>
+          <Text>You are Signed out</Text>
+        </SignedOut>
+        <StatusBar style="auto" />
+      </View>
+    </ClerkProvider>
   );
 }
 
